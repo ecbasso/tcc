@@ -21,6 +21,11 @@ Para remover todo o ambiente, estando no mesmo diretório do arquivo do **docker
 docker-compose down
 ```
 
+Após executar o comando para iniciar o ambiente, o moodle estará disponível para acessar através do navegador no endereço:
+```bash
+http://localhost:8080
+```
+
 ## Imagens Utilizadas
 
 Para criação do ambiente em forma de contêiner iremos utilizar imagens Docker já disponíveis, sendo elas:
@@ -41,8 +46,8 @@ Variáveis de ambiente suportadas pela imagem do contêiner do Moodle são:
 ###### Configurações de Usuário e do Site
 
 - `MOODLE_USERNAME`: Nome do usuário do Moodle. Valor padrão: **usuario**
-- `MOODLE_PASSWORD`: Senha do usuário do Moodle. Valor padrão: **bitnami**
-- `MOODLE_SITE_NAME`: Nome do site do Moodle. Valor padrão: **New Site**
+- `MOODLE_PASSWORD`: Senha do usuário do Moodle. Valor padrão: **moodle123**
+- `MOODLE_SITE_NAME`: Nome do site do Moodle. Valor padrão: **Moodle**
 
 ###### Configurações de Banco de Dados
 

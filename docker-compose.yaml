@@ -14,8 +14,8 @@ services:
     networks:                       # Redes utilizados pelo serviço
         - localhost
     ports:                          # Redirecionamento de portas
-        - "127.0.0.1:80:8080"
-        - "127.0.0.1:443:443"
+        - "127.0.0.1:8080:8080"
+        - "127.0.0.1:8443:8443"
     environment:                    # Variáveis de ambiente
         - MOODLE_USERNAME=usuario
         - MOODLE_PASSWORD=moodle123
@@ -23,6 +23,7 @@ services:
         - MOODLE_DATABASE_NAME=moodledb
         - MOODLE_DATABASE_USER=moodledbuser
         - MOODLE_DATABASE_PASSWORD=moodledbpassword
+        
 ##Serviço 2 - Banco de Dados
   mariadb:
     container_name: "mariadb"
