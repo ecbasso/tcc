@@ -18,7 +18,7 @@ docker-compose up -d
 Para remover todo o ambiente, estando no mesmo diretório do arquivo do **docker-compose.yaml**, basta executar o comando abaixo:
 
 ```bash
-docker-compose down -d
+docker-compose down
 ```
 
 ## Imagens Utilizadas

@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 services:
 ##Serviço 1 - Moodle
   moodle:                           # Nome do serviço
@@ -7,68 +7,66 @@ services:
       context: .
       dockerfile: Dockerfile-moodle
     depends_on:
-      - mariadb
-      - redis
+        - mariadb
     volumes:                        # Volumes persistentes utilizados
-      - moodle_data:/bitnami/moodle 
+        - moodle_data:/bitnami/moodle 
     networks:                       # Redes utilizados pelo serviço
-      - localhost
+        - localhost
     ports:                          # Redirecionamento de portas
-      - "127.0.0.1:80:8080"
-      - "127.0.0.1:443:443"
+        - "127.0.0.1:80:8080"
+        - "127.0.0.1:443:443"
     environment:                    # Variáveis de ambiente
-      - MOODLE_USERNAME=usuario
-      - MOODLE_PASSWORD=moodle123
-      - MOODLE_SITE_NAME=Moodle
-      - MOODLE_DATABASE_NAME=moodledb
-      - MOODLE_DATABASE_USER=moodledbuser
-      - MOODLE_DATABASE_PASSWORD=moodledbpassword
-      
+        - MOODLE_USERNAME=usuario
+        - MOODLE_PASSWORD=moodle123
+        - MOODLE_SITE_NAME=Moodle
+        - MOODLE_DATABASE_NAME=moodledb
+        - MOODLE_DATABASE_USER=moodledbuser
+        - MOODLE_DATABASE_PASSWORD=moodledbpassword
 ##Serviço 2 - Banco de Dados
   mariadb:
     container_name: "mariadb"
     image: bitnami/mariadb
     volumes:
-      - database:/bitnami/mariadb
+        - database:/bitnami/mariadb
     networks:
-      - localhost
+        - localhost
     ports:
-      - "127.0.0.1:3306:3306"
+        - "127.0.0.1:3306:3306"
     environment:
-      - MARIADB_DATABASE=moodledb
-      - MARIADB_USER=moodledbuser
-      - MARIADB_PASSWORD=moodledbpassword
+        - MARIADB_DATABASE=moodledb
+        - MARIADB_USER=moodledbuser
+        - MARIADB_PASSWORD=moodledbpassword
 
 ##Serviço 3 - Banco de Dados
   redis:
     container_name: "redis"
     image: bitnami/redis
     volumes:
-      - redis:/bitnami/redis/data
+        - redis:/bitnami/redis/data
     networks:
-      - localhost
+        - localhost
     ports:
-      - "127.0.0.1:6379:6379"
+        - "127.0.0.1:6379:6379"
     environment:
-      - REDIS_PASSWORD=moddleredispassword
+        - REDIS_PASSWORD=moddleredispassword
       
 ##Serviço 4 - API de Machine Learning
   machinelearning:
     container_name: "machinelearning"
     image: moodlehq/moodle-mlbackend-python
     depends_on:
-      - moodle
+        - moodle
     volumes:
-      - ml_data:/opt/mlbackenddata
+        - ml_data:/opt/mlbackenddata
     networks:
-      - localhost
+        - localhost
     ports:
-      - "127.0.0.1:5000:5000"
+        - "127.0.0.1:5000:5000"
 
 volumes:                            # Definição dos volumes persistentes
-  - moodle_data:
-  - database:
-  - redis:
-  - ml_data:
+        moodle_data:
+        database:
+        redis:
+        ml_data:
 networks:                           # Definição das redes
-  - localhost:
+        localhost:
