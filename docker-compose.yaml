@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile-moodle
     depends_on:
         - mariadb
+        - redis
     volumes:                        # Volumes persistentes utilizados
         - moodle_data:/bitnami/moodle 
     networks:                       # Redes utilizados pelo serviço
@@ -34,10 +35,10 @@ services:
         - "127.0.0.1:3306:3306"
     environment:
         - MARIADB_DATABASE=moodledb
-        - MARIADB_USER=moodledbuser
-        - MARIADB_PASSWORD=moodledbpassword
+        - MARIADB_ROOT_USER=moodledbuser
+        - MARIADB_ROOT_PASSWORD=moodledbpassword
 
-##Serviço 3 - Banco de Dados
+##Serviço 3 - Servico de Cache
   redis:
     container_name: "redis"
     image: bitnami/redis
@@ -53,7 +54,7 @@ services:
 ##Serviço 4 - API de Machine Learning
   machinelearning:
     container_name: "machinelearning"
-    image: moodlehq/moodle-mlbackend-python
+    image: moodlehq/moodle-mlbackend-python:2.4.0-python3.7.5 
     depends_on:
         - moodle
     volumes:
